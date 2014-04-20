@@ -5,6 +5,9 @@ if(isset($_GET['version'])){
     if(file_exists($file)){
         $f = file_get_contents($file);
         $exp = explode(PHP_EOL, $f);
-        echo json_encode($exp);
+        $matchLine = $exp[0];
+        unset($exp[0]);
+        $def = array($matchLine, $exp);
+        echo json_encode($def);
     }
 }
