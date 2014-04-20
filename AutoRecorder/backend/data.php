@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type: application/json");
 if(isset($_GET['version'])){
     $file = $_GET['version'] . ".txt";
     if(file_exists($file)){

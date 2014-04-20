@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^presets/([^/]*)\.json$ /presets/data.php?version=$1 [L]
