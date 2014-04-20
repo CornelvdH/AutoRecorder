@@ -1,4 +1,14 @@
 /**
+ * 
+ * Auto Recorder - Main Node.JS source file.
+ * Author: Cornel van der Heiden
+ * 
+ * Copyright: GNU GPL v2. Open source license not applicable to pre-compiled executables.
+ * See README.md for more license info.
+ * 
+ */
+
+/**
  * The HTTP Options array tells the request what server to reach and what page to request.
  */
 var httpOptions = {
