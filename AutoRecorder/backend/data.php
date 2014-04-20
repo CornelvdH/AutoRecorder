@@ -7,7 +7,7 @@ if(isset($_GET['version'])){
         $exp = explode(PHP_EOL, $f);
         $matchLine = $exp[0];
         unset($exp[0]);
-        $def = array($matchLine, $exp);
+        $def = array($matchLine, array_values($exp));
         echo json_encode($def);
     }
 }
