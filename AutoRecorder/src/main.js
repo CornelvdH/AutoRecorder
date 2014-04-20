@@ -89,6 +89,11 @@ var httpReqOptions = {
     port: 80,
     path: '/presets/' + (new Date()).toISOString().slice(0, 10) + '.json'
 };
+
+/**
+ * Present ourselves to our user.
+ */
+console.log("Auto Recorder - Welcome. Initializing...");
 /**
  * We first fetch the initialization data.
  */
