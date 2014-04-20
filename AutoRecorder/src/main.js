@@ -19,9 +19,9 @@ var httpOptions = {
 
 /**
  * The trigger text we use to determine if we need to start a recording.
- * We may get this value from external sources.
+ * We get this value from external sources.
  */
-var triggerWord = "Lansinger Magazine - Start Recording";
+var triggerWord = "";
 
 /**
  * We need the HTTP Library for this to work.
@@ -81,23 +81,49 @@ var exec = require('child_process').exec,
  */
 var recordData = [];
 
+/**
+ * These HTTP Request options define the place we get our track and trigger data.
+ */
 var httpReqOptions = {
     host: 'lfm.sysk.it',
     port: 80,
     path: '/presets/' + (new Date()).toISOString().slice(0, 10) + '.json'
 };
-
+/**
+ * We first fetch the initialization data.
+ */
 http.get(httpReqOptions, function(httpResult) {
+    /**
+     * This temporary data string contains our JSON Response from the backend.
+     */
     var mainBody = '';
+    /**
+     * When data is received we put it in the temporary data string.
+     */
     httpResult.on('data', function(pieces) {
         mainBody += pieces;
     });
+    /**
+     * Data ended, we can continue our main application logic.
+     */
     httpResult.on('end', function() {
-        recordData = JSON.parse(mainBody);
+        /**
+         * Parse our JSON into a temporary array, so we can divide the data parts.
+         */
+        var tempArray = JSON.parse(mainBody);
+        /**
+         * We set the trigger word previously declared in the application.
+         */
+        triggerWord = tempArray[0];
+        /**
+         * We define our recordings data.
+         */
+        recordData = tempArray[1];
         /**
          * Log it, debugging purposes.
          */
-        console.log(recordData);
+        console.log("Initialized. Trigger word: " + triggerWord);
+        console.log("Track titles available: " + recordData.join(", "));
         /**
          * We put our interval function in a var, so we can pull the plug more easily.
          */
